@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "main": "build/index.js",
   "type": "module",
+  "exports": {
+    ".": "./build/index.js"
+  },
   "keywords": [
     "blender",
+    "bonsai",
     "bim",
     "mcp",
     "claude"
   ],
-  "author": "",
+  "author": "Sébastien Lucas",
   "license": "MIT",
   "description": "Node.js MCP server for Blender Bonsai BIM integration",
   "dependencies": {
@@ -21,9 +25,11 @@
     "typescript": "^5.8.3"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "prepare": "npm run build",
     "start": "node build/index.js",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector build/index.js"
   },
   "files": [
     "build"
